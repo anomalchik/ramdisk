@@ -1,8 +1,22 @@
-#change partition permission
+#change partition permission start
 /dev/block/mmcblk0p1      0640	 root	    system
 /dev/block/mmcblk0p2      0640	 root	    system
+#elephone partition permission
 /dev/misc-sd              0660   root       system
-
+/dev/preloader            0640   root       system
+/dev/bootimg              0640   root       system
+/dev/recovery             0640   root       system
+/dev/sec_ro               0640   root       system
+/dev/kb                   0660   root       system
+/dev/dkb                  0660   root       system
+/dev/seccfg               0660   root       system
+/dev/pro_info             0660	 root	    system
+/dev/otp 		  		  0660	 root	    nvram
+/dev/nvram 		   		  0660	 root	    system
+/dev/misc		   		  0660	 root	    system
+/dev/block/mmcblk0	   	  0660	 root	    system
+/dev/block/mmcblk0boot0	  0660	 root	    system
+#change partition permission end
 
 #connectivity
 # Create char device file for WMT, GPS, BT, FM, WIFI
