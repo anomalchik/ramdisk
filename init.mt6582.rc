@@ -1,5 +1,5 @@
 # platform specific configuration items
-import init.mt6582.usb.rc
+# import init.usb.rc
 import init.modem.rc
 import init.protect.rc
 import init.project.rc
