@@ -42,9 +42,9 @@ on fs
 on post-fs
 
     # change sbchk permission before mounted as read-only
-    chown system system /sbchk
-    chown system system /sbchk/sbchk
-    chown system system /sbchk/sec_chk.sh
+    chown nvram system /sbchk
+    chown nvram system /sbchk/sbchk
+    chown nvram system /sbchk/sec_chk.sh
     chmod 750 /sbchk
     chmod 750 /sbchk/sbchk
     chmod 750 /sbchk/sec_chk.sh
@@ -76,7 +76,7 @@ on post-fs
 on post-fs-data
     # create basic filesystem structure
 
-    mkdir /data/nvram 0771 root system
+    mkdir /data/nvram 2770 root system
     mkdir /data/nvram/bt 2771 bluetooth bluetooth
     mkdir /data/nvram/media 0771 media audio
     mkdir /data/misc/bluetoothd 0770 bluetooth bluetooth
@@ -198,6 +198,7 @@ on post-fs-data
     mkdir /data/misc/akmd 0770 system system
     mkdir /data/misc/s62x 0771 compass compass
     mkdir /data/acdapi/ 0770 system system
+	mkdir /data/misc/acdapi/ 0770 system system
     chmod 0666 /data/misc/acdapi/calib.dat
     chmod 0666 /data/misc/acdapi/param.dat
     chmod 0666 /data/misc/acdapi/sensors.dat
@@ -319,22 +320,22 @@ on post-fs-data
     chmod 0660 /dev/camera-pipemgr
     chmod 0660 /dev/kd_camera_hw
     chmod 0660 /dev/kd_camera_flashlight
-    chmod 0660 /dev/kd_camera_hw_bus2
+#    chmod 0660 /dev/kd_camera_hw_bus2
     chmod 0660 /dev/FM50AF
-    chmod 0660 /dev/DW9718AF
+#    chmod 0660 /dev/DW9718AF
     chmod 0660 /dev/OV8825AF
-    chmod 0660 /dev/CAM_CAL_DRV
+#    chmod 0660 /dev/CAM_CAL_DRV
 
     chown system camera /dev/camera-sysram
     chown system camera /dev/camera-isp
     chown system camera /dev/camera-pipemgr
     chown system camera /dev/kd_camera_hw
     chown system camera /dev/kd_camera_flashlight
-    chown system camera /dev/kd_camera_hw_bus2
+#    chown system camera /dev/kd_camera_hw_bus2
     chown system camera /dev/FM50AF
-    chown system camera /dev/DW9718AF
+#    chown system camera /dev/DW9718AF
     chown system camera /dev/OV8825AF
-    chown system camera /dev/CAM_CAL_DRV
+#    chown system camera /dev/CAM_CAL_DRV
 
 
     #/dev/RT_Monitor
@@ -409,6 +410,15 @@ on post-fs-data
     #otp
     chmod 0660 /proc/driver/otp
     chown root system /proc/driver/otp
+	
+	#autok
+    chown root system /sys/autok/debug
+    chown root system /sys/autok/param_count
+    chown root system /sys/autok/ready
+    chown root system /sys/autok/stage1/2/DONE
+    chown root system /sys/autok/stage1/2/PARAMS
+    chown root system /sys/autok/stage1/2/VOLTAGE
+    chown root system /sys/autok/stage2/2
 # End of adding by MTK drivers
 # -----------------------
 
