@@ -1,14 +1,6 @@
-# MTK project .rc configure 
+# MTK project .rc configure
 on early-init
 
-#add the multi power on off function
-on fs
-    # for multi-logo (emmc)
-    chown system system /dev/logo
-    chown system system /dev/block/mmcblk0
-    chown system system /sys/class/BOOT/BOOT/boot/logo_mode
-    chmod 0644 /dev/logo
-    chmod 0664 /dev/block/mmcblk0
 
 on post-fs-data
 
@@ -33,9 +25,9 @@ on post-fs-data
     insmod /system/lib/modules/mtk_wmt_detect.ko
 
 # Create char device file for WMT, GPS, BT, FM, WIFI
-    mknod /dev/stpwmt c 190 0;
-    mknod /dev/stpgps c 191 0;
-    mknod /dev/stpbt  c 192 0;
+    exec /system/xbin/mknod /dev/stpwmt c 190 0
+    exec /system/xbin/mknod /dev/stpgps c 191 0
+    exec /system/xbin/mknod /dev/stpbt  c 192 0
 
     chmod 0660 /dev/stpwmt
     chown system system /dev/stpwmt
@@ -43,10 +35,21 @@ on post-fs-data
     chmod 0660 /dev/wmtdetect
  		chown system system /dev/wmtdetect
  		
-    mknod /dev/wmtWifi c 153 0
+    exec /system/xbin/mknod /dev/wmtWifi c 153 0
     chmod 0660 /dev/wmtWifi
     chown system system /dev/wmtWifi
+#Camera
+    chmod 0660 /dev/OV8825AF
+    chown system camera /dev/OV8825AF
 
+    chmod 0660 /dev/OV8826AF
+    chown system camera /dev/OV8826AF
+
+    chmod 0660 /dev/FM50AF
+    chown system camera /dev/FM50AF
+    
+    chmod 0660 /dev/LITEON3H7AF
+    chown system camera /dev/LITEON3H7AF
 # BT
     chmod 0660 /dev/stpbt
     chown bluetooth radio /dev/stpbt
@@ -78,16 +81,6 @@ on post-fs-data
 #
 # Connectivity related device nodes & configuration (end)
 
-on boot
-    # Refer to http://source.android.com/devices/tech/storage/index.html
-    # It said, "Starting in Android 4.4, multiple external storage devices are surfaced to developers through 
-    #           Context.getExternalFilesDirs(), Context.getExternalCacheDirs(), and Context.getObbDirs().
-    #           External storage devices surfaced through these APIs must be a semi-permanent part of the device (such as an SD card slot in a battery compartment).
-    #           Developers expect data stored in these locations to be available over long periods of time."
-    # Therefore, if the target has the SD card slot in a battery compartment, we need to specify SECONDARY_STORAGE (*** UN-Comment the following command ***)
-    #
-    # For mt6582_phone_qhd, the sd slot is blocked by battery. So we need to specify SECONDARY_STORAGE.
-    export SECONDARY_STORAGE /storage/sdcard1
 #
 # Connectivity related services (Begin)
 #
